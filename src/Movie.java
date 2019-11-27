@@ -17,24 +17,24 @@ public class Movie{
 		}
 	}
 	
-	public int book(){
+	public void book(){
 		if(availability>=maxCapacity){
 			System.out.print("No seats available");
+			return;
 		}
 		updateAvailability(1);
-		return 1;
+		System.out.println("Movie booked succesfully");
+		System.out.println("Current movie availability: "+this.availability);
 	}
 	
-	public int cancel(){
+	public void cancel(){
 		if(availability == maxCapacity){
 			System.out.print("Movie booking record not found");
+			return;
 		}
 		updateAvailability(-1);
-		return 1;
-		
-	}
-	private int getAvailability(){
-		return this.availability;
+		System.out.println("Booking cancelled succesfully");
+		System.out.println("Current movie availability: "+this.availability);
 	}
 	
 	private void updateAvailability(int availability){
@@ -43,5 +43,8 @@ public class Movie{
 		this.availability += availability;
 	}
 	
+	public int getAvailability(){
+		return this.availability;
+	}
 	
 }
