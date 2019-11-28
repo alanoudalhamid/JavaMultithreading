@@ -3,6 +3,7 @@ public class Movie{
 
 	private int availability = 10;
 	private int maxCapacity = 20;
+	public Object movieController = new Object();
 	
 	public void updateBooking(int bookingAction){
 		switch(bookingAction){
@@ -13,7 +14,7 @@ public class Movie{
 			cancel();
 			break;
 		default:
-			System.out.print("Invalid input");
+			System.out.println(Thread.currentThread().getName()+"Action input is invalid");
 		}
 	}
 	
@@ -22,9 +23,10 @@ public class Movie{
 			System.out.print("No seats available");
 			return;
 		}
-		updateAvailability(1);
+		System.out.println(Thread.currentThread().getName()+" is booking a movie");
+		availability += 1;
 		System.out.println("Movie booked succesfully");
-		System.out.println("Current movie availability: "+this.availability);
+		System.out.println("Current movie availability: "+availability);
 	}
 	
 	public void cancel(){
@@ -32,19 +34,14 @@ public class Movie{
 			System.out.print("Movie booking record not found");
 			return;
 		}
-		updateAvailability(-1);
+		System.out.println(Thread.currentThread().getName()+" is cancelling movie booking");
+		availability -= 1;
 		System.out.println("Booking cancelled succesfully");
-		System.out.println("Current movie availability: "+this.availability);
+		System.out.println("Current movie availability: "+availability);
 	}
 	
-	private void updateAvailability(int availability){
-		//availability = 1 when cancellation
-		//availability = -1 when booking
-		this.availability += availability;
-	}
 	
 	public int getAvailability(){
-		return this.availability;
+		return availability;
 	}
-	
 }

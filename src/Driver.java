@@ -5,24 +5,29 @@ public class Driver {
 	private static Scanner read;
 
 	public static void main(String args[]){
+		//variables
 		read = new Scanner(System.in);
 		Movie aladdin = new Movie();
-		int action;
+		int numOfThreads;
 		
-		if(args.length>=2){
-			Thread[] threads = new Thread[args.length];
+		System.out.println("Current movie availability: "+aladdin.getAvailability());
+		System.out.println("Type number of concurrent threads");
+		numOfThreads = read.nextInt();
+		Thread[] threads = new Thread[numOfThreads];
+		try{
 			for (int i=0; i<threads.length;i++){
-				System.out.println("Current movie availability: "+aladdin.getAvailability());
-				System.out.println("Type '1' to book Aladdin, type '2' to cancel Aladdin booking");
-				action = read.nextInt();
-				try{
+				System.out.printf("Please enter action for thread %d ('1' to book Aladdin, type '2' to cancel Aladdin booking)\n",i);
+				int action = read.nextInt();
 				threads[i]= new Thread(new Booking(aladdin, action));
-				threads[i].start();
-				threads[i].join();
 				}
-				catch(Exception e){}
-				
+			
+				for(int i = 0; i<threads.length;i++){
+					threads[i].start();
+					threads[i].join();
+				}
 			}
+			catch(Exception e){}
+				
 		}
 	}
-}
+

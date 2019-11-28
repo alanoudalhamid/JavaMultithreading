@@ -12,7 +12,9 @@ public class Booking implements Runnable{
 	
 	public void run(){
 		try{
-			movie.updateBooking(bookingAction);
+			synchronized(movie.movieController){
+				movie.updateBooking(bookingAction);
+			}
 		}
 		catch(Exception e){}
 	}
