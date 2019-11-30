@@ -17,24 +17,24 @@ public class Movie{
 			System.out.println(Thread.currentThread().getName()+"Action input is invalid");
 		}
 	}
-	
+	//=======================Critical Section============================
 	public void book(){
+		System.out.println(Thread.currentThread().getName()+" is booking a movie");
 		if(availability>=maxCapacity){
 			System.out.print("No seats available");
 			return;
 		}
-		System.out.println(Thread.currentThread().getName()+" is booking a movie");
 		availability += 1;
 		System.out.println("Movie booked succesfully");
 		System.out.println("Current movie availability: "+availability);
 	}
 	
 	public void cancel(){
-		if(availability == maxCapacity){
-			System.out.print("Movie booking record not found");
+		System.out.println(Thread.currentThread().getName()+" is cancelling movie booking");
+		if(availability == 0){
+			System.out.println("Movie booking record not found");
 			return;
 		}
-		System.out.println(Thread.currentThread().getName()+" is cancelling movie booking");
 		availability -= 1;
 		System.out.println("Booking cancelled succesfully");
 		System.out.println("Current movie availability: "+availability);
@@ -44,4 +44,5 @@ public class Movie{
 	public int getAvailability(){
 		return availability;
 	}
+	//====================================================================
 }
